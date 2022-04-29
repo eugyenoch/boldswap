@@ -18,3 +18,4 @@
             </div>
         </div>
     </div>
+    <div class="m-auto"> <span>Hints: A - Approve, E - Edit, C- Credit, Del - Delete</span></div>

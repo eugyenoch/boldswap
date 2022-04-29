@@ -9,7 +9,7 @@ include('cookie.php');
 /*$SQLprofile = "SELECT * FROM `users` WHERE `user_email`='$sessEmail'";
 $SQLex = $con->query($SQLprofile);
 foreach($SQLex as $info){extract($info);}*/
-$profile_photo = 'upload/'.$photo;
+$profile_photo = 'upload/'.$info['photo'];
 
 /*$sqlWallet = "SELECT * FROM `wallet` WHERE `user_email`='$sessEmail'";
 $SQLex2 = $con->query($sqlWallet);
@@ -128,12 +128,11 @@ if(in_array($file_ext,$extensions)=== false){
         echo "<script>alert('Select a valid image not more than 500KB')</script>";
     }
 
-$con->close();
 ?>
-<?php include('header.php'); ?>
+<?php include 'header.php'; ?>
 <body class="page-user">
 
-<?php include('nav.php'); ?>
+<?php include 'nav.php'; ?>
  <div class="col-lg-12">
           <div class="info-box">
             <div class="card tab-style1"> 
@@ -289,4 +288,6 @@ $con->close();
     <?php
 if(isset($toast) && $toast==='success'){echo "<script>toastr.success('You have updated your information', 'Success')</script>";}
 if(isset($toast) && $toast==='fail'){echo "<script>toastr.error('We could not update that information', 'Error')</script>";}
+
+$con->close();
 ?>

@@ -80,6 +80,7 @@ include('../cookie.php');
   </div>
   <!-- .page-content -->
 </div>
+<?php include('footer-menu.php');?>
     <div class="footer-bar">
         <div class="container">
             <div class="row align-items-center justify-content-center">
@@ -89,7 +90,6 @@ include('../cookie.php');
                        <li><a href="https://boldswap.org/docs/terms-of-use.php">Terms of Service</a></li>
         <li><a href="https://boldswap.org/docs/about.php">About</a></li>
         <li><a href="https://boldswap.org/docs/cookie-policy.php">Cookie Policy</a></li>
-       <!--  <li><a href="https://boldswap.org/docs/refund-policy.php">Refund Policy</a></li> -->
         <li><a href="https://boldswap.org/docs/privacy-policy.php">Privacy Policy</a></li>
                     </ul>
                 </div>

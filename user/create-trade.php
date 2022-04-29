@@ -24,8 +24,6 @@ if(isset($_POST['proceedRoom'])){
     header('Refresh:1');}
   else{$toast = "fail";}
 }
-
-$con->close();
 ?>
 <?php include('header.php'); ?>
 
@@ -42,7 +40,7 @@ $con->close();
             
                         <div class="content-area card">
               <form action="<?= htmlentities($_SERVER['PHP_SELF']);?>" method="post" accept-charset="utf-8">
-                 <input value="<?= 'TXN'.mt_rand(1000000,999999);?>" name="txn" type="hidden">
+                 <input value="<?= 'TXN'.mt_rand(100000,999999);?>" name="txn" type="hidden">
                 <div class="card-innr">
                   <div class="card-head">
                     
@@ -271,4 +269,6 @@ $con->close();
     <?php
 if(isset($toast) && $toast==='success'){echo "<script>toastr.success('Your transaction is pending', 'Success')</script>";}
 if(isset($toast) && $toast==='fail'){echo "<script>toastr.error('We could not update that information, check if your account is funded', 'Error')</script>";}
+
+$con->close();
 ?>

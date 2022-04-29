@@ -9,7 +9,7 @@ include('../cookie.php');
 /*$SQLprofile = "SELECT * FROM `users` WHERE `user_email`='$sessEmail'";
 $SQLex = $con->query($SQLprofile);
 foreach($SQLex as $info){extract($info);}*/
-$profile_photo = '../upload/'.$photo;
+$profile_photo = '../upload/'.$admin_info['photo'];
 
 /*$sqlWallet = "SELECT * FROM `wallet` WHERE `user_email`='$sessEmail'";
 $SQLex2 = $con->query($sqlWallet);
@@ -271,6 +271,7 @@ $con->close();
         </div>
     </div>
 </div>
+<?php include('footer-menu.php');?>
         <!-- jQuery 3 --> 
 <script src="../dist/js/jquery.min.js"></script> 
 

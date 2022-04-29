@@ -46,6 +46,7 @@ $con->close();
   </center>
                   </div>
                 </div>
+<?php include('footer-menu.php');?>
                    <!-- jQuery 3 --> 
 <script src="../dist/js/jquery.min.js"></script> 
 

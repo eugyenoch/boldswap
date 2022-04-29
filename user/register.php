@@ -1,7 +1,7 @@
 <?php
     //Form validation
 //Import my security function from function.php
-include('function.php');
+include 'function.php';
 //Define empty variables
 $fname = $lname = $email = $pass = $cpass = "";
 
@@ -96,6 +96,9 @@ $con->close();
     <link rel="stylesheet" href="../assets/css/theme.css?ver=200">
 
     <link rel="stylesheet" type="text/css" href="./assets/css/custom.css">
+    <style>
+        .err{color:red;}
+    </style>
 </head>
 
 <body class="nk-body body-wider bg-light-alt">
@@ -122,7 +125,7 @@ $con->close();
                         </div>
                         <!-- Menu @s -->
                         <div class="header-navbar">
-                            <?php include('../nav.php');?>
+                            <?php include '../nav.php';?>
                         </div><!-- .header-navbar @e -->
                     </div>
                 </div>
@@ -137,7 +140,7 @@ $con->close();
                     <div class="nk-blocks d-flex justify-content-center">
                         <div class="ath-container m-0">
                             <div class="ath-body">
-                                <h5 class="ath-heading title">Sign Up<small class="tc-default">Create New Boldswap Account</small></h5>
+                                <h5 class="ath-heading title">Sign Up<small class="tc-default">Create a Boldswap Account</small></h5>
                                 <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST" name="regForm">
                                     <div class="field-item">
                                         <div class="field-wrap">
@@ -203,7 +206,7 @@ $con->close();
 </html>
 <?php
 if(isset($toast) && $toast==='success'){
-  echo "<script>toastr.success('Lets verify and create your account', 'Notice')</script>";
+  echo "<script>toastr.success('Be patient while we verify and create your account', 'Notice')</script>";
 }
 
 if(isset($toast) && $toast==='fail'){

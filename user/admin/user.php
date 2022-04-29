@@ -5,8 +5,6 @@ include('../function.php');
 include('../cookie.php');
 ?>
 
-
-
 <?php include('header.php'); ?>
 
 <body class="page-user" style="background: #ECF0F1 !important;">
@@ -169,7 +167,6 @@ if(isset($_GET['dwa']) && $_GET['dwa']!==null){
                        <li><a href="https://boldswap.org/docs/terms-of-use.php">Terms of Service</a></li>
         <li><a href="https://boldswap.org/docs/about.php">About</a></li>
         <li><a href="https://boldswap.org/docs/cookie-policy.php">Cookie Policy</a></li>
-       <!--  <li><a href="https://boldswap.org/docs/refund-policy.php">Refund Policy</a></li> -->
         <li><a href="https://boldswap.org/docs/privacy-policy.php">Privacy Policy</a></li>
                     </ul>
                 </div>

@@ -42,12 +42,12 @@
             <div class="container">
                 <div class="navbar-innr">
                     <ul class="navbar-menu">
-                        <li><a href="https://boldswap.org/user/user-area.php"><span class="icon-s"><i class="fa fa-columns"></i>&nbsp;Dashboard</a></li>
-                        <li><a href="https://boldswap.org/user/edit-profile.php"><span class="icon-s"><i class="fa fa-user"></i>&nbsp;Edit Profile</a></li>
-                        <li><a href="https://boldswap.org/user/create-trade.php"><i class="fa fa-chart-line"></i>&nbsp;Create Trade</a></li>
-                        <li><a href="https://boldswap.org/user/user-transactions.php"><i class="fa fa-file-invoice-dollar"></i>&nbsp;Account Transactions</a></li>
+                        <li><a href="user-area.php"><span class="icon-s"><i class="fa fa-columns"></i>&nbsp;Dashboard</a></li>
+                        <li><a href="create-trade.php"><i class="fa fa-chart-line"></i>&nbsp;Create Trade</a></li>
+                        <li><a href="user-transactions.php"><i class="fa fa-file-invoice-dollar"></i>&nbsp;Account Transactions</a></li>
                         <li><a href="#" data-toggle="modal" data-target="#withdrawal-modal"><i class="fa fa-hand-holding-usd"></i>&nbsp;Withdrawal</a></li>
-                         <li><a href="https://boldswap.org/user/logout.php"><i class="fa fa-sign-out-alt"></i>&nbsp;Logout</a></li>
+                         <li><a href="edit-profile.php"><span class="icon-s"><i class="fa fa-user"></i>&nbsp;Edit Profile</a></li>
+                         <li><a href="logout.php"><i class="fa fa-sign-out-alt"></i>&nbsp;Logout</a></li>
                     </ul>
                     <ul class="navbar-btns">
                         <li>
@@ -149,10 +149,8 @@
                         if(isset($_COOKIE['currency']) && $_COOKIE['currency']!==null){
                             
                             $cookieCurrency = $_COOKIE['currency'];
-                        $show_address = "SELECT * FROM `addresses` WHERE `addresses`.`wallets` = '$cookieCurrency'";
-
+                        $show_address = "SELECT * FROM `addresses` WHERE `wallets` = '$cookieCurrency'";
                         $show_address_exec = $con->query($show_address);
-                        
                         foreach ($show_address_exec as $fetch_wallet){extract($fetch_wallet);?>
                              <div class="input-item input-with-label">
                             <span class="input-item-label">QR Code</span><br>
@@ -161,12 +159,12 @@
                         </div>
 
                         <div class="input-item input-with-label">
-                           <span class="input-item-label"><small>Pay to this Address, afterwards, come back and click the upload proof button or use your member transactions area to upload proof</small></span>
+                           <span class="input-item-label"><small>Pay to this Address<!-- , afterwards, come back and click the upload proof button or use your member transactions area to upload proof --></small></span>
                             <input class="input-bordered" type="text" name="add" value="<?= $addresses;?>" id="myInput" disabled><br><button type="button" class="btn btn-primary" onclick="myFunction()">Copy address</button>
                             <br><output id="displayText"></output>                    
                         </div>
                     <?php } }?>
-                        <a href="upload-proof.php" class="btn btn-primary btn-between" name="upload-proof">Click To Upload Proof&nbsp;<i class="fa fa-forward"></i></a>
+                        <!-- <a href="upload-proof.php" class="btn btn-primary btn-between" name="upload-proof">Click To Upload Proof&nbsp;<i class="fa fa-forward"></i></a> -->
                     </form>
                 </div>
             </div>

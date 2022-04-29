@@ -112,7 +112,7 @@ else{
                                             <label for="remember-me-100">Remember Me</label>
                                         </div>
                                         <div class="forget-link fz-6">
-                                            <a href="./check.php">Forgot password?</a>
+                                            <a href="check.php">Forgot password?</a>
                                         </div>
                                     </div>
                                     <button class="btn btn-primary btn-block btn-md" name="signin">Sign In</button>
@@ -122,7 +122,7 @@ else{
                                     <li class="col"><a href="#" class="btn btn-md btn-facebook btn-block"><em class="icon fab fa-facebook-f"></em><span>Facebook</span></a></li>
                                     <li class="col"><a href="#" class="btn btn-md btn-google btn-block"><em class="icon fab fa-google"></em><span>Google</span></a></li>
                                 </ul>
-                                <div class="ath-note text-center"> Don’t have an account? <a href="./register.php"> <strong>Sign up here</strong></a>
+                                <div class="ath-note text-center"> Don’t have an account? <a href="register.php"> <strong>Sign up here</strong></a>
                                 </div>
                             </div>
                         </div>

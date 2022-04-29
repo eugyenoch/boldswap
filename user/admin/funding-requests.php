@@ -41,7 +41,7 @@ $folder_image = "../upload/";
                                     <div class="dt-type-text">Approve</div>
                                 </th>
                                 <th class="data-col data-actions">
-                                    <div class="dt-type-text"><a href="user.php?fr=<?= $ftxn; ?>">Delete</a></div>
+                                    <div class="dt-type-text">Delete</a></div>
                                 </th>
                             </tr>
                         </thead>
@@ -115,7 +115,6 @@ $folder_image = "../upload/";
   <!-- .page-content -->
 </div>
 <?php include('footer-menu.php');?>
-<div class="m-auto"> <span>Hints: A - Approve, E - Edit, C- Credit, Del - Delete</span></div>
 
     <div class="footer-bar">
         <div class="container">
@@ -158,14 +157,14 @@ $folder_image = "../upload/";
       function approve(){
        <?php 
        $sql_change_approve = "UPDATE `fund` SET `status`='approved' WHERE `ftxn` = '$ftxn'";
-       $con->mysqli_query($sql_change_approve);
+       $con->query($sql_change_approve);
        ?>
    }
 
     function remove(){
        <?php 
        $sql_change_remove = "DELETE FROM `fund` WHERE `ftxn` = '$ftxn'";
-       $con->mysqli_query($sql_change_remove);
+       $con->query($sql_change_remove);
        ?>
    }
     </script>

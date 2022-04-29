@@ -119,6 +119,7 @@ $con->close();
     </div>
 </div>
 </div>
+<?php include('footer-menu.php');?>
    
     <div class="footer-bar">
         <div class="container">

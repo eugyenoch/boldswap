@@ -13,5 +13,5 @@ if($con->connect_error){
 	die("Connection failed: ".$con->connect_error);
 }
 
-include_once('./include/loop.php');
+include_once('include/loop.php');
 ?>

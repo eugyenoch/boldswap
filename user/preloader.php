@@ -3,9 +3,8 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 //Require my functions.php file
-include('./function.php');
-
-include('header.php'); 
+include 'function.php';
+include 'header.php'; 
 
 require 'admin/vendor/phpmailer/src/Exception.php';
 require 'admin/vendor/phpmailer/src/PHPMailer.php';
@@ -53,7 +52,6 @@ Kindly check your mail inbox for the welcome mail to certify verification.<br>
 Safe trade, swift and secure transactions.</big></p>
 </div></div>
  
-
     <!-- jQuery 3 --> 
 <script src="dist/js/jquery.min.js"></script> 
 
