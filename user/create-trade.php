@@ -8,20 +8,23 @@ if(isset($_POST['proceedRoom'])){
   //$eEmail = $_POST['eEmail'];
 
   //Extract variables from user input
+  $txn = $_POST['txn'];
+  $seller_email = $_POST['seller_email'];
+  $buyer_email = $_POST['buyer_email'];
   $cur1 = $_POST['currency_1'];
   $cur2 = $_POST['currency_2'];  
   $seller_amount = floatval($_POST['seller_amount']);
   $buyer_amount = floatval($_POST['buyer_amount']);
-  $user_role = $_POST['user_role'];
+  //$user_role = $_POST['user_role'];
 
- $sql_transact_insert = "INSERT INTO transaction(txn,user_email,first_cur,second_cur,seller_amount,buyer_amount,role)VALUES('$txn','$user_email','$cur1','$cur2','$seller_amount','$buyer_amount','$user_role')";
+ $sql_transact_insert = "INSERT INTO transact(txn,user_email,seller_email,buyer_email,first_cur,second_cur,seller_amount,buyer_amount)VALUES('$txn','$session_email','$seller_email','$buyer_email','$cur1','$cur2','$seller_amount','$buyer_amount')";
 
 
   /*$sql_transact_update = "UPDATE `transaction` SET `first_cur` = '$cur1', `second_cur` = '$cur2',`seller_amount` = '$seller_amount', `buyer_amount` = '$buyer_amount',`role` = '$user_role' WHERE `transaction`.`user_email` = '$user_email'";
 */
   if($con->query($sql_transact_insert) === TRUE){
     $toast = "success";
-    header('Refresh:1');}
+    header('Location:room.php');}
   else{$toast = "fail";}
 }
 ?>
@@ -41,6 +44,8 @@ if(isset($_POST['proceedRoom'])){
                         <div class="content-area card">
               <form action="<?= htmlentities($_SERVER['PHP_SELF']);?>" method="post" accept-charset="utf-8">
                  <input value="<?= 'TXN'.mt_rand(100000,999999);?>" name="txn" type="hidden">
+                 <br>
+                 <input value="<?php if(isset($session_email) && $session_email!==null){echo $session_email;}?>" name="eEmail" type="hidden">
                 <div class="card-innr">
                   <div class="card-head">
                     
@@ -62,9 +67,18 @@ if(isset($_POST['proceedRoom'])){
                             <label class="pay-option-label" for="payMATIC">
                               <span class="pay-title">
                                 
-                                <span class="pay-cur"><?php if(isset($currency) && $currency!==null){echo $currency;} ?></span>
+                                <span class="pay-cur"><?php if(isset($currency) && $currency==='BTC'){echo $currency;} ?></span>
                               </span>
-                              <span class="pay-amount"><?php if(isset($amount) && $amount!==null){echo $amount;} ?></span>
+                              <span class="pay-amount"><?php
+    $total_deposit = "SELECT sum(amount) AS totalsum FROM fund WHERE user_email='$session_email' AND status='approved'";
+    $total_deposit_query = $con->query($total_deposit);
+    $total_deposit_display = mysqli_fetch_assoc($total_deposit_query);
+  
+   if($total_deposit_display){
+    $sum_of_rows = $total_deposit_display['totalsum'];
+    //if(isset($withdraw_info['wstatus']) && $withdraw_info['wstatus']==="approved"){
+   //foreach($total_deposit_display as $total){extract($total)
+echo $sum_of_rows;} ?></span>
                             </label>
                           </div>
                         </div>
@@ -75,76 +89,66 @@ if(isset($_POST['proceedRoom'])){
 
                   <div class="card-head">
                     <span class="card-sub-title text-primary font-mid">Step 1</span>
-                    <h4 class="card-title">Select currencies</h4>
-                  </div>
-
-                  <br />
-
-                  <select name="currency_1" required
-                    class="input-bordered ">
-                    <option value="">Select Currency 1</option>
-                     <?php foreach($sql_addresses_exec as $addresses_info){extract($addresses_info);?>
-                                        <option value="<?= $addresses_info['wallets']?>"><?= $addresses_info['wallets']?></option><?php }?>
-                                         
-                                      </select>
-                  <div class="note note-plane note-secondary note-sm  pl-0">
-                    <p class="text-muted">
-                      This is the original cryptocurrency,
-                      This goes with the coin in demand from either the buyer or the seller.
-                    </p>
-                  </div>
-
-                  <br />
-
-                  <select name="currency_2" required
-                    class="input-bordered ">
-                    <option value="">Select Currency 2</option>
-                     <?php foreach($sql_addresses_exec as $addresses_info){extract($addresses_info);?>
-                                        <option value="<?= $addresses_info['wallets']?>"><?= $addresses_info['wallets']?></option><?php }?>
-                                       
-                                      </select>
+                    <h4 class="card-title">Seller</h4>
+                    <label>Seller Name:</label><br> <span><input type="text" name="seller_name" class="input-bordered"></span>
+                    <br>
+                    <label>Seller Email:</label><br> <span><input type="email" name="seller_email" class="input-bordered"></span>
+                    <br>
+                </div>
+                   <label>Cryptocurrency:</label><br><select name="currency_1" required class="input-bordered ">
+                    <?php foreach($sql_addresses_exec as $addresses_info){extract($addresses_info);?><option value="<?= $addresses_info['wallets'];?>"><?= $addresses_info['wallets'];?></option><?php }?> 
+                  </select>
                   <div class="note note-plane text-muted note-sm  pl-0">
                     <p class="text-muted">
                       This is the currency that is being exchanged for the original cryptocurrency,
                       this can be either a cryptocurrency or a local currency.
                     </p>
                   </div>
-                  
-                  <br />
+                  <br>
+                   <label>Amount:</label><br>
+                    <input value="" type="text" class="input-bordered " name="seller_amount" required>
+                    <div class="note note-plane text-muted note-sm  pl-0">
+                      <p class="text-muted">The total amount which the seller is sending.</p>
+                    </div><br>
+                     <div class="token-calc-note note note-plane">
+                      <em class="fas fa-times-circle text-success"></em>
+                      <span class="note-text text-light">
+                        Escrow Fee: 10.00% of transaction
+                      </span>
+                    </div>
+
+                 
+                  <br /> <br />
 
                   <div class="card-head">
                     <span class="card-sub-title text-primary font-mid">Step 2</span>
-                    <h4 class="card-title">Enter amount</h4>
+                    <h4 class="card-title">Buyer</h4>
                   </div>
-
-                  
-
                   <div class="token-contribute">
+                      <p><label>Buyer Name:</label><br> <span><input type="text" name="buyer_name" class="input-bordered"></span>
+                        <br>
+                    <label>Buyer Email:</label><br> <span><input type="email" name="buyer_email" class="input-bordered"></span>
+                    <br><br>
 
-                    <input value="" type="text" class="input-bordered " name="seller_amount"
-                      placeholder="Enter amount from seller" required>
-                    <div class="note note-plane text-muted note-sm  pl-0">
-                      <p class="text-muted">The total amount which the seller is sending.</p>
-                    </div>
+                     <label>Cryptocurrency:</label><br><select name="currency_2" required class="input-bordered">
+                     <?php foreach($sql_addresses_exec as $addresses_info){extract($addresses_info);?><option value="<?= $addresses_info['wallets']?>"><?= $addresses_info['wallets']?></option><?php }?> </select>
                     
+                    <br><br>
+
+                    <label>Amount:</label><br><input value="" type="text" class="input-bordered" name="buyer_amount" required>
+                    <div class="note note-plane text-muted note-sm  pl-0">
+                      <span class="text-muted">The total amount which the buyer is sending.</span>
+                    </div>
                     <br>
 
-                    <input value="" type="text"
-                      class="input-bordered " name="buyer_amount" placeholder="Enter amount from buyer" required>
-                    <div class="note note-plane text-muted note-sm  pl-0">
-                      <p class="text-muted">The total amount which the buyer is sending.</p>
-                    </div>
-                    
-                    <br>
-
-                    <select name="user_role" required class="input-bordered ">
+                   <!--  <select name="user_role" required class="input-bordered ">
                       <option value="">Select your role</option>
                       <option value="seller" >I am Selling</option>
                       <option value="buyer" >I am Buying</option>
-                    </select>
-
+                    </select> 
                     <br />
                     <br />
+                    -->
 
                     <div class="token-calc-note note note-plane">
                       <em class="fas fa-times-circle text-success"></em>
@@ -157,7 +161,9 @@ if(isset($_POST['proceedRoom'])){
                   
                   <div class="pay-buttons">
                     <div class="pay-button">
+                      <?php if($sum_of_rows>0){?>
                       <button type="submit" class="btn btn-primary btn-between w-100" name="proceedRoom">Proceed to Trading Room&nbsp;<i class="fa fa-forward"></i></button>
+                    <?php }else{echo "<big>You have no active balance!</big>";} ?>
                     </div>
                   </div>
                   
@@ -165,8 +171,6 @@ if(isset($_POST['proceedRoom'])){
               </form>
             </div> <!-- .content-area -->
           </div><!-- .col -->
-
-
 
           <div class="aside sidebar-right col-lg-4">
     
@@ -254,9 +258,7 @@ if(isset($_POST['proceedRoom'])){
     <!-- Modal Centered -->
     
     <!-- Modal End -->
-    <!-- Modal Centered -->
-    
-   
+    <!-- Modal Centered -->   
     <!-- JavaScript (include all script here) -->
 <script src="https://transactright.com/js/app.js"></script>
     <script src="./assets/js/jquery.bundle49f7.js"></script>
@@ -264,6 +266,18 @@ if(isset($_POST['proceedRoom'])){
     
  <!-- Toastr -->
 <script src="dist/js/toastr.min.js"></script>
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/626683f47b967b11798c5f16/1g1g7711k';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
     </body>
     </html>
     <?php

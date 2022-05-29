@@ -59,6 +59,7 @@
                             <a class="drop-toggle" href="#"><i class="fa fa-chart-area"></i>&nbsp;Account Requests</a>
                             <ul class="navbar-dropdown">
                                <li><a class="p2pText" href="funding-requests.php">Funding Requests</a></li>
+                                <li><a class="p2pText" href="escrows.php">Escrow Requests</a></li> 
                                  <li><a class="p2pText" href="transactions.php">Trade Requests</a></li> 
                                 <li><a class="p2pText" href="withdraw-requests.php">Withdraw Requests</a></li>
                             </ul>
@@ -67,8 +68,8 @@
                         <li><a href="addresses.php"><i class="fa fa-file-invoice-dollar"></i>&nbsp;Addresses</a></li>
                          <li><a href="transactions.php"><i class="fa fa-file-invoice-dollar"></i>&nbsp;Account Transactions</a></li>
                       <!--   <li><a href="#" data-toggle="modal" data-target="#withdrawal-modal"><i class="fa fa-hand-holding-usd"></i> Withdrawal</a></li> -->
-                      <li><a href="./edit-profile.php"><span class="icon-s"><i class="fa fa-user"></i>&nbsp;Dashboard</a></li>
-                         <li><a href="/user/logout.php"><i class="fa fa-sign-out-alt"></i>&nbsp;Logout</a></li>
+                      <li><a href="./edit-profile.php"><span class="icon-s"><i class="fa fa-user"></i>&nbsp;Profile</a></li>
+                         <li><a href="../logout.php"><i class="fa fa-sign-out-alt"></i>&nbsp;Logout</a></li>
                     </ul>
                     <!-- <ul class="navbar-btns">
                         <li>

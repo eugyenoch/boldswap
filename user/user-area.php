@@ -3,10 +3,10 @@
 include('function.php');
 //Begin cookie and include the cookie file
 include('cookie.php');
-
 //$sessEmail = $_SESSION['email'];
 
-$sql_active_transact = "SELECT * FROM `transaction` WHERE `user_email`='$session_email' AND `status`='approved'";
+
+$sql_active_transact = "SELECT * FROM `transact` WHERE `user_email`='$session_email' AND `status`='approved'";
 $sql_active_exec = $con->query($sql_active_transact);
 $sql_count_active_exec = mysqli_num_rows($sql_active_exec);
 
@@ -52,8 +52,8 @@ if(!isset($_SESSION['email'])){header('Location:login.php');}
 <div class="token-info">
 <h1 class="token-info-head text-light">Total Trades</h1>
 <div class="gaps-2x"></div>
-<h5 class="token-info-sub"><?php if(isset($sql_count_row_exec4) && $sql_count_row_exec4!==null){
-    echo $sql_count_row_exec4;}?></h5>
+<h5 class="token-info-sub"><?php if(isset($sql_count_row_transact) && $sql_count_row_transact!==null){
+    echo $sql_count_row_transact;}?></h5>
 </div>
 </div>
 <!-- .card -->
@@ -96,20 +96,27 @@ if(!isset($_SESSION['email'])){header('Location:login.php');}
 </li>
 
 <li class="token-balance-sub col-md-12 col-lg-6 mb-3">
+    <?php if(isset($fund_info['amount']) && isset($fund_info['currency'])){
+    echo "<span>Latest Requested Deposit: ".$fund_info['amount']." ".$fund_info['currency']. "</span><br>";}?>
     <?php
-    echo "<span class=''>Latest Deposit: ".$fund_info['amount']." ".$fund_info['currency']. "</span><br>";
-    $total_deposit = "SELECT sum(amount) AS totalsum FROM fund WHERE user_email='$session_email'";
+    $total_deposit = "SELECT sum(amount) AS totalsum FROM fund WHERE user_email='$session_email' AND status='approved'";
     $total_deposit_query = $con->query($total_deposit);
     $total_deposit_display = mysqli_fetch_assoc($total_deposit_query);
-  
+    
    if($total_deposit_display){
     $sum_of_rows = $total_deposit_display['totalsum'];
+    echo "<br><a class='btn btn-lg btn-outline-warning' href='user-transactions.php'>View All Deposits</a><br>";
+   // echo "<span>Approved deposits: ". $sum_of_rows. " </span><br>";
     if(isset($withdraw_info['wstatus']) && $withdraw_info['wstatus']==="approved"){
    //foreach($total_deposit_display as $total){extract($total)?>
-<span class=""><?= "Total Deposit: ".($sum_of_rows - $withdraw_info['wamount'])." ".$fund_info['currency']; ?></span>
+
+    <!-- Approved Balance-->
+     
+
+<span><?= "Total Deposit: ".($sum_of_rows - $withdraw_info['wamount'])." ".$fund_info['currency']; ?></span>
 <span class="sub"></span>
 <span></span>
-<?php }else{echo "Your total deposits will appear here";} }?>
+<?php }else{echo "Total transactions will appear here";} }?>
 </li>
                         </ul>
 </div>

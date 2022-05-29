@@ -22,13 +22,13 @@ if(isset($_POST['confirm'])){
     }
     else{
       $toast = "success";
-        header("Refresh:2,url=change-password.php?em=$user");
+        header("Refresh:1,url=change-password.php?em=$user");
     }
 }
 else{
   //header('Location:login.php');
 }
-$con->close();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,6 +53,7 @@ $con->close();
 <link rel="stylesheet" href="../dist/plugins/hmenu/ace-responsive-menu.css">
 <link rel="icon" href="../dist/img/p2pdarkicon.png">
 <!--Toastr-->
+<link rel="stylesheet" type="text/css" href="../dist/css/toastr.css">
 <link rel="stylesheet" type="text/css" href="../../custom.css">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -90,14 +91,14 @@ $con->close();
 <!-- /.login-box --> 
 <!-- jQuery 3 --> 
 <script src="../dist/js/jquery.min.js"></script> 
-
+<!--Toastr-->
+<script src="../dist/js/toastr.min.js"></script>
 <!-- v4.0.0-alpha.6 --> 
 <script src="../dist/bootstrap/js/bootstrap.min.js"></script> 
 
 <!-- template --> 
 <script src="../dist/js/niche.js"></script>
-<!--Toastr-->
-<script type="text/javascript" src="../dist/js/toastr.min.js"></script>
+
 
 </body>
 </html>
@@ -109,4 +110,6 @@ if(isset($toast) && $toast==='success'){
 if(isset($toast) && $toast==='fail'){
   echo "<script>toastr.error('We cannot log you in', 'Wrong credentials')</script>";
 }
+
+$con->close();
 ?>

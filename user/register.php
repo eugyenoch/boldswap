@@ -58,23 +58,23 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 ?>
 <?php
 if(isset($_POST['reg'])){
-  //$affid = $_POST['affid'];
+  $affid = $_POST['affid'];
+  $ftxn = 'TXN'.mt_rand(100000,999999);
   if($pass===$cpass){
     $active = "<a href='https://boldswap.org/user/admin/login.php'>Login</a>";
     $sql_check_email_exists = "SELECT * FROM users WHERE user_email = '$email'";
     $sql_check_email_exec = $con->query($sql_check_email_exists);
     if(mysqli_num_rows($sql_check_email_exec)>0){$toast = "email";}
     else{
-  $sqlIns = "INSERT INTO users(firstname,lastname,user_email,user_pass)VALUES('$fname','$lname','$email','$cpass')";
+  $sqlIns = "INSERT INTO users(firstname,lastname,user_email,user_pass,affid)VALUES('$fname','$lname','$email','$cpass','$affid')";
   $sqlC = $con->query($sqlIns);
 
-  $sqlIns2 = "INSERT INTO fund(user_email,amount,status)VALUES('$email',50,'approved')";
+  $sqlIns2 = "INSERT INTO fund(user_email,ftxn,currency,amount,status)VALUES('$email','$ftxn','BTC',0,'approved')";
   $sqlC2 = $con->query($sqlIns2);
  if($sqlC){$toast = "success";header("Refresh:1,url=preloader.php?fn=$fname&em=$email");
 }else{$toast = "fail";} 
 }
 } }
-$con->close();
 ?>
 
 <!DOCTYPE html>
@@ -142,6 +142,11 @@ $con->close();
                             <div class="ath-body">
                                 <h5 class="ath-heading title">Sign Up<small class="tc-default">Create a Boldswap Account</small></h5>
                                 <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST" name="regForm">
+                                    <div class="field-item" hidden>
+                                        <div class="field-wrap">
+                                            <input type="text" name="affid" class="input-bordered" value="<?= mt_rand(100000,999999);?>">
+                                        </div>
+                                    </div>
                                     <div class="field-item">
                                         <div class="field-wrap">
                                             <input type="text" name="fname" class="input-bordered" placeholder="Firstname" required>
@@ -216,4 +221,5 @@ if(isset($toast) && $toast==='fail'){
 if(isset($toast) && $toast==='email'){
   echo "<script>toastr.error('The email already exists', 'Failure')</script>";
 }
+$con->close();
 ?>

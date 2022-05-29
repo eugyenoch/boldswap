@@ -6,6 +6,7 @@
                     <tr>
                        <td><a class="text-secondary btn btn-outline-warning" href="view-users.php">Dashboard</a></td>
                        <td><a class="text-secondary btn btn-outline-warning" href="funding-requests.php">Funding Requests</a></td>
+                       <td><a class="text-secondary btn btn-outline-warning" href="escrows.php">Escrow Requests</a></td>
                        <td><a class="text-secondary btn btn-outline-warning" href="addresses.php">Addresses</a></td>
                        <td><a class="text-secondary btn btn-outline-warning" href="withdraw-requests.php">Withdraw Requests</a></td>                      
                        <td><a class="text-secondary btn btn-outline-warning" href="view-admin.php">View Admins</a></td>

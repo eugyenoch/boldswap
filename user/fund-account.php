@@ -12,7 +12,7 @@ if(isset($_POST['fund'])){
   $amount = floatval($_POST['amount']);  
 
   /*$sql_fund_update = "UPDATE `fund` SET `currency` = '$currency', `amount` = '$amount' WHERE `fund`.`user_email` = '$user_email'";*/
-$sql_fund_update = "INSERT INTO fund(user_email,ftxn,currency,amount)VALUES('$user_email','$ftxn','$currency','$amount')";
+$sql_fund_update = "INSERT INTO fund(user_email,ftxn,currency,amount,status)VALUES('$user_email','$ftxn','$currency','$amount','pending')";
   if($con->query($sql_fund_update) === TRUE){
    //echo "<script>alert('Your funding request is submitted and is pending approval')</script>";
   echo"<script>location.href='user-transactions.php'</script>";
@@ -30,12 +30,12 @@ if(isset($_POST['withdraw'])){
   /*$sql_withdraw_update = "UPDATE `withdraw` SET `currency` = '$currency', `amount` = '$amount',`wallet_address` = '$address' WHERE `withdraw`.`user_email` = '$user_email'";
 */
 
-  $sql_withdraw_update = "INSERT INTO withdraw(user_email,wtxn,wcurrency,wamount,wallet_address)VALUES('$user_email','$wtxn','$currency2','$amount2','$address')";
+  $sql_withdraw_update = "INSERT INTO withdraw(user_email,wtxn,wcurrency,wamount,wallet_address,wstatus)VALUES('$user_email','$wtxn','$currency2','$amount2','$address','pending')";
 
   if($con->query($sql_withdraw_update) === TRUE){
    echo "<script>alert('Your withdrawal request is submitted and is pending approval')</script>";
     header('Refresh:2,url=user-transactions.php');}
-  else{echo "<script>alert('There is a problem with your withdrawal request, please try again')</script>";}
+  else{echo "<script>alert('There is a problem with your withdrawal request, try again')</script>";}
 }
 
 
@@ -47,7 +47,7 @@ if(isset($_POST['starter'])){
   $interest = 0.1;
   $package = "starter";
 
-$sql_starter_update = "INSERT INTO transaction(txn,user_email,package,amount,currency,interest)VALUES('$stxn','$user_email','$package','$amount','$currency','$interest')";
+$sql_starter_update = "INSERT INTO transaction(txn,user_email,package,amount,currency,interest,status)VALUES('$stxn','$user_email','$package','$amount','$currency','$interest','pending')";
   if($con->query($sql_starter_update) === TRUE){
       echo "<script>alert('Your starter plan request is submitted and is pending approval. Do not resubmit request.')</script>";
   echo"<script>location.href='user-transactions.php'</script>";
@@ -64,7 +64,7 @@ if(isset($_POST['premium'])){
   $duration = 90;
   $interest = 0.1;
 
-$sql_starter_update = "INSERT INTO transaction(txn,user_email,package,amount,currency,duration,interest)VALUES('$ptxn','$user_email','$package','$amount','$currency','$duration','$interest')";
+$sql_starter_update = "INSERT INTO transaction(txn,user_email,package,amount,currency,duration,interest,status)VALUES('$ptxn','$user_email','$package','$amount','$currency','$duration','$interest','pending')";
   if($con->query($sql_starter_update) === TRUE){
       echo "<script>alert('Your premium plan request is submitted and is pending approval. Do not resubmit request.')</script>";
   echo"<script>location.href='user-transactions.php'</script>";
@@ -81,7 +81,7 @@ if(isset($_POST['goldpack'])){
   $duration = 90;
   $interest = 0.1;
 
-$sql_starter_update = "INSERT INTO transaction(txn,user_email,package,amount,currency,duration,interest)VALUES('$gptxn','$user_email','$package','$amount','$currency','$duration','$interest')";
+$sql_starter_update = "INSERT INTO transaction(txn,user_email,package,amount,currency,duration,interest,status)VALUES('$gptxn','$user_email','$package','$amount','$currency','$duration','$interest','pending')";
   if($con->query($sql_starter_update) === TRUE){
       echo "<script>alert('Your Gold Pack plan request is submitted and is pending approval. Do not resubmit request.')</script>";
   echo"<script>location.href='user-transactions.php'</script>";
@@ -97,7 +97,7 @@ if(isset($_POST['goldplus'])){
   $duration = 365;
   $interest = 0.1;
 
-$sql_starter_update = "INSERT INTO transaction(txn,user_email,package,amount,currency,duration,interest)VALUES('$gpptxn','$user_email','$package','$amount','$currency','$duration','$interest')";
+$sql_starter_update = "INSERT INTO transaction(txn,user_email,package,amount,currency,duration,interest,status)VALUES('$gpptxn','$user_email','$package','$amount','$currency','$duration','$interest','pending')";
   if($con->query($sql_starter_update) === TRUE){
       echo "<script>alert('Your Gold Plus plan request is submitted and is pending approval. Do not resubmit request.')</script>";
   echo"<script>location.href='user-transactions.php'</script>";

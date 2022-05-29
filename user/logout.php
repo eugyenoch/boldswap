@@ -9,6 +9,7 @@ session_unset();
 session_destroy();
 //Redirect to login
 header('Location:./admin/login.php');
+
 if(isset($_SESSION['email'])){
 //Remove all session variables
 session_unset();
@@ -19,5 +20,6 @@ header('Location:./login.php');
 } 
 }
 else{
-	header('Location:https://boldswap.org');
+	session_destroy();
+	header('Location:./login.php');
 }

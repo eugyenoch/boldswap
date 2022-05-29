@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 09, 2022 at 06:04 AM
--- Server version: 10.3.32-MariaDB-log-cll-lve
--- PHP Version: 7.3.32
+-- Generation Time: May 05, 2022 at 08:50 AM
+-- Server version: 10.3.34-MariaDB-log-cll-lve
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `boldswap`
+-- Database: `elecuuhh_boldswap`
 --
 
 -- --------------------------------------------------------
@@ -40,7 +40,11 @@ CREATE TABLE `addresses` (
 --
 
 INSERT INTO `addresses` (`id_no`, `wallets`, `addresses`, `qrcode`) VALUES
-(1, 'BTC', '153ByvKtXyqGw4PCWNKgexYLeM8okSP6j8', 'bitcoinqr.jpeg');
+(55, 'flow (FLOW)', '0x17853EA4381BC2e83AdF8879F20E0540548C81e7', NULL),
+(56, 'EOS(EOS)', '0x17853EA4381BC2e83AdF8879F20E0540548C81e7', NULL),
+(57, 'ETH(ethereum)', '0x17853EA4381BC2e83AdF8879F20E0540548C81e7', NULL),
+(58, 'Everex(EVX)', '0x17853EA4381BC2e83AdF8879F20E0540548C81e7', NULL),
+(59, 'BTC (Bitcoin)', '1LUw4mub8NqvE8Z3Rszg9WqcFovcnEpTd5', NULL);
 
 -- --------------------------------------------------------
 
@@ -67,7 +71,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id_no`, `firstname`, `lastname`, `user_email`, `user_pass`, `address`, `city`, `country`, `phone`, `photo`, `reg_date`) VALUES
-(1, 'Zenith', 'Trade', 'admin@boldswap.org', '7e58d63b60197ceb55a1c487989a3720', 'Enugu', 'Enugu', 'Australia', '', 'cirrus.png', '2021-12-23');
+(1, 'CHOSEN', 'WAYNE', 'admin@boldswap.org', 'c45d4f742f91becdd440364ee46ce895', 'NELSON', 'NELSON', 'New Zealand', '', 'cirrus.png', '2021-12-23');
 
 -- --------------------------------------------------------
 
@@ -92,8 +96,39 @@ CREATE TABLE `fund` (
 --
 
 INSERT INTO `fund` (`id_no`, `user_email`, `ftxn`, `currency`, `amount`, `fproof`, `fcomment`, `status`, `request_date`) VALUES
-(100, 'lizescada.eg@gmail.com', 'TXN257278', 'BTC', 0.376915410, NULL, NULL, 'approved', '2022-02-12'),
-(104, 'donbaron2334@gmail.com', 'TXN209330', 'BTC', 6.654328000, NULL, NULL, 'pending', '2022-02-12');
+(106, 'iamgoodandbad001@gmail.com', NULL, NULL, '50.000000000', NULL, NULL, 'approved', '2022-04-16'),
+(107, 'bettermyself99@gmail.com', NULL, NULL, '50.000000000', NULL, NULL, 'approved', '2022-04-19'),
+(108, 'boldswaporg@gmail.com', NULL, NULL, '50.000000000', NULL, NULL, 'approved', '2022-04-20'),
+(109, 'Eutimiochris@gmail.com', NULL, NULL, '50.000000000', NULL, NULL, 'approved', '2022-04-25'),
+(110, 'St6771935@gmail.com', NULL, NULL, '50.000000000', NULL, NULL, 'approved', '2022-04-26'),
+(111, 'boldswaporg@gmail.com', NULL, NULL, '50.000000000', NULL, NULL, 'approved', '2022-04-27'),
+(112, 'yhamemail@gmail.com', NULL, NULL, '50.000000000', NULL, NULL, 'approved', '2022-04-29'),
+(113, 'st6771935@gmail.com', NULL, NULL, '50.000000000', NULL, NULL, 'approved', '2022-04-29'),
+(114, 'enochdavid8@gmail.com', NULL, NULL, '50.000000000', NULL, NULL, 'approved', '2022-04-29'),
+(115, 'enochdavid8@gmail.com', NULL, NULL, '50.000000000', NULL, NULL, 'approved', '2022-04-29'),
+(116, 'st6771935@gmail.com', 'TXN393389', 'flow (FLOW)', '100.000000000', NULL, NULL, 'approved', '2022-04-29'),
+(118, 'enochdavid8@gmail.com', NULL, NULL, '50.000000000', NULL, NULL, 'approved', '2022-04-29'),
+(119, 'iamgoodandbad001@gmail.com', NULL, NULL, '50.000000000', NULL, NULL, 'approved', '2022-04-29'),
+(125, 'ogoliprecious2@gmail.com', NULL, NULL, '50.000000000', NULL, NULL, 'approved', '2022-04-29');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transact`
+--
+
+CREATE TABLE `transact` (
+  `id_no` int(11) NOT NULL,
+  `txn` varchar(25) DEFAULT NULL,
+  `user_email` varchar(255) DEFAULT NULL,
+  `first_cur` varchar(512) DEFAULT NULL,
+  `second_cur` varchar(512) DEFAULT NULL,
+  `seller_amount` decimal(18,9) DEFAULT NULL,
+  `buyer_amount` decimal(18,9) DEFAULT NULL,
+  `role` varchar(512) DEFAULT NULL,
+  `status` varchar(255) NOT NULL DEFAULT 'pending',
+  `transact_date` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -120,9 +155,10 @@ CREATE TABLE `transaction` (
 --
 
 INSERT INTO `transaction` (`id_no`, `txn`, `user_email`, `package`, `amount`, `currency`, `duration`, `interest`, `role`, `status`, `transact_date`) VALUES
-(12, 'TXN598068', 'user@gmail.com', 'starter', 100.00, 'Bitcoin', '30', 0.10, 'investor', 'pending', '2022-02-04'),
-(14, 'TXN712608', 'admin@boldswap.org', 'Gold Plus', 100000.00, 'BTC', '365', 0.10, 'investor', 'approved', '2022-02-04'),
-(15, 'TXN749289', 'admin@boldswap.org', 'Gold Plus', 100000.00, 'BTC', '365', 0.10, 'investor', 'pending', '2022-02-04');
+(12, 'TXN598068', 'user@gmail.com', 'starter', '100.00', 'Bitcoin', '30', '0.10', 'investor', 'pending', '2022-02-04'),
+(14, 'TXN712608', 'admin@boldswap.org', 'Gold Plus', '100000.00', 'BTC', '365', '0.10', 'investor', 'approved', '2022-02-04'),
+(15, 'TXN749289', 'admin@boldswap.org', 'Gold Plus', '100000.00', 'BTC', '365', '0.10', 'investor', 'pending', '2022-02-04'),
+(27, 'TXN112600', 'user@user.com', 'Gold Plus', '100000.00', 'BTC', '365', '0.10', 'investor', 'pending', '2022-04-29');
 
 -- --------------------------------------------------------
 
@@ -152,7 +188,9 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id_no`, `firstname`, `lastname`, `user_email`, `user_pass`, `address`, `city`, `country`, `phone`, `photo`, `affid`, `reg_date`) VALUES
 (35, 'Daniel', 'John', 'user@gmail.com', '24c9e15e52afc47c225b757e7bee1f9d', NULL, NULL, NULL, NULL, NULL, 111111, '2021-12-28'),
 (37, 'Baron', 'Pacioty', 'donbaron2334@gmail.com', '8b649262319dd4f032f6f7bb156e10c4', NULL, NULL, NULL, NULL, NULL, 248002, '2022-02-04'),
-(38, 'Elizabeth', 'Grigorova', 'lizescada.eg@gmail.com', '9bfae9bb28dcfbfb6a9b9c6f09d2b5c0', NULL, NULL, NULL, NULL, NULL, 332145, '2022-02-06');
+(44, 'PETRA', 'LOVE', 'boldswaporg@gmail.com', 'fd4b4af1f9ff76a660ce38992ff18aef', NULL, NULL, NULL, NULL, NULL, NULL, '2022-04-27'),
+(46, 'FRIDAY', 'SWAP', 'st6771935@gmail.com', '04690bd15229e1859d7fb739666fa6aa', NULL, NULL, NULL, NULL, NULL, NULL, '2022-04-29'),
+(50, 'good', 'bad', 'iamgoodandbad001@gmail.com', '04690bd15229e1859d7fb739666fa6aa', NULL, NULL, NULL, NULL, NULL, NULL, '2022-04-29');
 
 -- --------------------------------------------------------
 
@@ -219,7 +257,7 @@ ALTER TABLE `withdraw`
 -- AUTO_INCREMENT for table `addresses`
 --
 ALTER TABLE `addresses`
-  MODIFY `id_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `admin`
@@ -231,19 +269,19 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `fund`
 --
 ALTER TABLE `fund`
-  MODIFY `id_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+  MODIFY `id_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
 
 --
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `id_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `withdraw`

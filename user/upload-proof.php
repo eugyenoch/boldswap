@@ -36,12 +36,12 @@ if(in_array($file_ext,$extensions)=== false){
       }else{$toast = "fail";}
     }
 }
-$con->close();
+
 ?>
   <?php include('header.php'); ?>
 
 <body class="page-user">
-<?php include('nav.php'); ?>
+
   <div> 
   <div class="page-content">
     <div class="container">
@@ -127,4 +127,6 @@ if(isset($toast) && $toast==='success'){
 if(isset($toast) && $toast==='fail'){
   echo "<script>toastr.error('Proof of payment upload declined, please try again', 'Failure')</script>";
 }
+
+$con->close();
 ?>

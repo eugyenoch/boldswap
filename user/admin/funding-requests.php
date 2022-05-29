@@ -90,13 +90,13 @@ $folder_image = "../upload/";
                         </td>
 
                         <td class="data-col dt-type">
-                            <a href="user.php?af=<?= $ftxn; ?>" class="dt-type-md"><span class='badge badge-outline badge-info badge-md'>Approve</span></a>
-                            <a href="user.php?af=<?= $ftxn; ?>" class="dt-type-sm badge badge-sq badge-outline badge-info badge-md">A</a>
+                            <a href="user.php?afr=<?= $ftxn; ?>" class="dt-type-md"><span class='badge badge-outline badge-info badge-md'>Approve</span></a>
+                            <a href="user.php?afr=<?= $ftxn; ?>" class="dt-type-sm badge badge-sq badge-outline badge-info badge-md">A</a>
                         </td>
 
                         <td class="data-col dt-type">
-                            <a name="delete" href="user.php?df=<?= $ftxn; ?>" class="dt-type-md"><span class='badge badge-outline badge-primary badge-md'>Delete</span></a>
-                            <a href="user.php?df=<?= $ftxn; ?>" class="dt-type-sm badge badge-sq badge-outline badge-primary badge-md">Del</a>
+                            <a name="delete" href="user.php?dfr=<?= $ftxn; ?>" class="dt-type-md"><span class='badge badge-outline badge-primary badge-md'>Delete</span></a>
+                            <a href="user.php?dfr=<?= $ftxn; ?>" class="dt-type-sm badge badge-sq badge-outline badge-primary badge-md">Del</a>
                         </td>
                             </tr>
                         <?php }?>
@@ -125,7 +125,6 @@ $folder_image = "../upload/";
                         <li><a href="https://boldswap.org/docs/terms-of-use.php">Terms of Service</a></li>
         <li><a href="https://boldswap.org/docs/about.php">About</a></li>
         <li><a href="https://boldswap.org/docs/cookie-policy.php">Cookie Policy</a></li>
-        <!-- <li><a href="https://boldswap.org/docs/refund-policy.php">Refund Policy</a></li> -->
         <li><a href="https://boldswap.org/docs/privacy-policy.php">Privacy Policy</a></li>
                     </ul>
                 </div>
@@ -152,22 +151,6 @@ $folder_image = "../upload/";
     <script src="https://transactright.com/js/app.js"></script>
 <script src="../assets/js/jquery.bundle49f7.js"></script>
 <script src="../assets/js/script49f7.js"></script>
-    
-<script type="text/javascript">
-      function approve(){
-       <?php 
-       $sql_change_approve = "UPDATE `fund` SET `status`='approved' WHERE `ftxn` = '$ftxn'";
-       $con->query($sql_change_approve);
-       ?>
-   }
-
-    function remove(){
-       <?php 
-       $sql_change_remove = "DELETE FROM `fund` WHERE `ftxn` = '$ftxn'";
-       $con->query($sql_change_remove);
-       ?>
-   }
-    </script>
 
 <!-- Toastr -->
 <script src="dist/js/toastr.min.js"></script>

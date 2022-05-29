@@ -15,7 +15,7 @@ if(isset($_POST['editAmount'])){
   }
   else{$toast = "fail";}
 }
-$con->close();
+
 ?>
 <?php include('header.php'); ?>
 
@@ -69,4 +69,6 @@ $con->close();
     <?php
 if(isset($toast) && $toast==='success'){echo "<script>toastr.success('You have changed user information, 'Success')</script>";}
 if(isset($toast) && $toast==='fail'){echo "<script>toastr.error('That operation could not be carried out. Try again', 'Error')</script>";}
+
+$con->close();
 ?>

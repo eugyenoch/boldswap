@@ -18,14 +18,17 @@ include('cookie.php');
                 <table class="table" style="width:50% !important; margin:auto;">
 <tr>
     <td class="col-md-6"> <span class="btnTarget"><center><a href="" data-toggle="modal" data-target="#view-address" class="dt-type-md"><?php if(isset($request_date)&&isset($amount)&&isset($currency)&&isset($status)){echo "<span class='btn btn-primary btn-md'>Make Payment</span>";}?></a></center></span></td>
-    <td class="col-md-6"> <span class="btnTarget"><center><a href="upload-proof.php" data-toggle="" data-target="" class="dt-type-md"><?php if(isset($request_date)&&isset($amount)&&isset($currency)&&isset($status)){echo "<span class='btn btn-primary btn-md'>Upload Proof</span>";}?></a></center></span></td>
+
+    <td class="col-md-6"> <span class="btnTarget"><center><a href="upload-proof.php" class="dt-type-md"><?php if(isset($request_date)&&isset($amount)&&isset($currency)&&isset($status)){echo "<button class='btn btn-primary btn-md'>Upload Proof</button>";}?></a></center></span></td>
 </tr>
 </table>   
 <div class="card-innr table-responsive">
 
                     <div class="card-head">
+                        <!-- FUNDING TABLE -->
                          <!-- <h4 class="card-title">Latest Funding Request</h4>  -->
                     </div>
+                    <?php if(isset($request_date)&&isset($amount)&&isset($currency)&&isset($status)){?>
                               <table class="data-table table table-hover dt-init user-tnx hideTb">
                         <thead>
                              
@@ -43,6 +46,7 @@ include('cookie.php');
                         </thead>
                         <tbody>
                                                       <tr class="data-item">
+                            <?php foreach($sql_fund_exec as $fund_info){extract($fund_info);?>
                     <td class="data-col dt-tnxno">
                         <div class="d-flex align-items-center">
       <!-- <div class="data-state data-state-pending">
@@ -66,8 +70,10 @@ include('cookie.php');
 
          <td class="data-col dt-tnxno"> <span class="btnTarget"><a href="" data-toggle="modal" data-target="#view-address" class="dt-type-md"><?php if(isset($request_date)&&isset($amount)&&isset($currency)&&isset($status)){echo "<span class='btn btn-primary btn-md'>Payment and Proof</span>";}?></a></span></td>
                             </tr>
+                        <?php } ?>
                                                     </tbody>
                     </table>
+                <?php } ?>
                     <div class="myrow showTb">
                  <div class="mycolumn">
                       <div class="intermediate"><?php if(isset($ftxn) && $ftxn!==null){echo "Transaction ID";}?></div>
@@ -99,11 +105,12 @@ include('cookie.php');
                 </div>
             </div>
                       <!-- .card-innr -->
-
+<!-- WITHDRAW TABLE -->
               <div class="card-innr table-responsive">
                     <div class="card-head">
                         <h4 class="card-title"> <?php if(isset($withdraw_request_date)&&isset($wamount)&&isset($wcurrency)&&isset($wstatus)){echo "<h4 class=''>Latest Withdrawal Transactions</h4>";}else{echo "";}?></h4>
                     </div>
+                    <?php if(isset($withdraw_request_date)&&isset($wamount)&&isset($wcurrency)&&isset($wstatus)){?>
   <table class="data-table table table-hover dt-init user-tnx hideTb">
                         <thead>
                             <tr class="data-item data-head">
@@ -119,6 +126,7 @@ include('cookie.php');
                         </thead>
                         <tbody>
                                         <tr class="data-item">
+            <?php foreach($sql_withdraw_exec as $withdraw_info){extract($withdraw_info);?>
                 <td class="data-col dt-tnxno">
                     <div class="d-flex align-items-center">
                                                                 <div class="fake-class">
@@ -139,8 +147,10 @@ include('cookie.php');
                     <span class="dt-type-sm badge badge-sq badge-outline badge-success badge-md">D</span>
                        
                             </tr>
+                        <?php } ?>
                                                     </tbody>
                     </table>
+                <?php } ?>
                 </div>
                               <!-- .card-innr -->
  <div class="myrow showTb">
@@ -175,11 +185,13 @@ include('cookie.php');
                 
                 <!--Investment Table -->
                 <!-- .card-innr -->
-
+                <!-- TRANSACTIONS TABLE -->
               <div class="card-innr table-responsive">
                     <div class="card-head">
                         <h4 class="card-title"> <?php if(isset($transact_date)&&isset($package)&&isset($duration)&&isset($interest)){echo "<h4 class=''>Latest Trading Transactions</h4>";}else{echo "";}?></h4>
                     </div>
+
+    <?php if(isset($transact_date)&&isset($package)&&isset($duration)&&isset($interest)){?>
   <table class="data-table table table-hover dt-init user-tnx hideTb">
                         <thead>
                             <tr class="data-item data-head">
@@ -200,6 +212,7 @@ include('cookie.php');
         
 
                                         <tr class="data-item">
+        <?php foreach($sql_exec4 as $transact_info){extract($transact_info);?>
                 <td class="data-col dt-tnxno">
                     <div class="d-flex align-items-center">
                                                                 <div class="fake-class">
@@ -231,9 +244,85 @@ include('cookie.php');
                        </td>
 
                             </tr>
+                        <?php } ?>
                                                     </tbody>
                     </table>
+                <?php } ?>
                 </div>
+
+
+
+                  <!-- ESCROW TRANSACT TABLE -->
+              <div class="card-innr table-responsive">
+                    <div class="card-head">
+                        <h4 class="card-title"> <?php if(isset($transaction_info['id_no'])&&isset($transaction_info['user_email'])&&isset($transaction_info['txn'])&&isset($transaction_info['transact_date'])){echo "<h4 class=''>Latest Escrow Trades</h4>";}else{echo "";}?></h4>
+                    </div>
+
+    <?php if(isset($transaction_info['id_no'])&&isset($transaction_info['user_email'])&&isset($transaction_info['txn'])&&isset($transaction_info['transact_date'])){?>
+  <table class="data-table table table-hover dt-init user-tnx">
+                        <thead>
+                            <tr class="data-item data-head">
+                                <th class="data-col dt-tnxno">Transaction ID</th>
+                                <th class="data-col dt-amount">Seller Email</th>
+                                <th class="data-col dt-amount">Seller Amount</th>
+                                 <th class="data-col dt-amount">Buyer Email</th>
+                                <th class="data-col dt-amount">Buyer Amount</th>
+                               <th class="data-col dt-amount">Date</th>
+                                <th class="data-col dt-account">Status</th>
+                                <th class="data-col dt-type">
+                                    <div class="dt-type-text">Type</div>
+                                </th>
+                                <th class="data-col data-actions">
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+        
+
+                                        <tr class="data-item">
+        <?php foreach($sql_transact_exec as $transaction_info){extract($transaction_info);?>
+                <td class="data-col dt-tnxno">
+                    <div class="d-flex align-items-center">
+                                                                <div class="fake-class">
+                        <span class="lead tnx-id"><?php if(isset($transaction_info['txn']) && $transaction_info['txn']!==null){echo $transaction_info['txn'];} else{echo"No Trade Transactions Yet";}?></span>
+                            <span class="sub sub-date"><?php if(isset($transaction_info['transact_date']) && $transaction_info['transact_date']!==null){echo $transaction_info['transact_date'];}?></span>
+                        </div>
+                    </div>
+                </td>
+                  <td class="data-col dt-account">
+<span class="lead user-info text-warning"><?php if(isset($transaction_info['seller_email']) && $transaction_info['seller_email']!==null){echo $transaction_info['seller_email'];}?></span>
+                                                    </td>
+                <td class="data-col dt-token">
+                    <span class="lead token-amount"><?php if(isset($transaction_info['seller_amount']) && $transaction_info['seller_amount']!==null){echo $transaction_info['seller_amount'];}?></span>
+                    <span class="sub sub-symbol"><?php if(isset($transaction_info['first_cur']) && $transaction_info['first_cur']!==null){echo strtoupper($transaction_info['first_cur']);}?></span>
+                </td>
+                  <td class="data-col dt-account">
+<span class="lead user-info"><?php if(isset($transaction_info['buyer_email']) && $transaction_info['buyer_email']!==null){echo $transaction_info['buyer_email'];}?></span>
+                                                    </td>
+        <td class="data-col dt-account">
+            <span class="lead user-info"><?php if(isset($transaction_info['buyer_amount']) && isset($transaction_info['buyer_amount'])){echo $transaction_info['buyer_amount'];}?></span>
+            <span class="sub sub-symbol"><?php if(isset($transaction_info['second_cur']) && $transaction_info['second_cur']!==null){echo strtoupper($transaction_info['second_cur']);}?></span>
+        </td>
+         <td class="data-col dt-account">
+<span class="lead user-info"><?php if(isset($transaction_info['transact_date']) && $transaction_info['transact_date']!==null){echo $transaction_info['transact_date'];}?></span>
+                                                    </td>
+                <td class="data-col dt-account">
+<span class="lead user-info text-warning"><?php if(isset($transaction_info['status']) && $transaction_info['status']!==null){echo $transaction_info['status'];}?></span>
+                                                    </td>
+                                            
+                <td class="data-col dt-type">
+<?php if(isset($transaction_info['id_no'])&&isset($transaction_info['user_email'])&&isset($transaction_info['txn'])&&isset($transaction_info['transact_date'])){echo "<span class='dt-type-md badge badge-outline badge-error badge-md'>Escrow Trade</span>";}?>
+                    <span class="dt-type-sm badge badge-sq badge-outline badge-success badge-md">Es</span>
+                       </td>
+
+                            </tr>
+                        <?php } ?>
+                                                    </tbody>
+                    </table>
+                <?php } ?>
+                </div>
+
+
                               <!-- .card-innr -->
  <!-- .card-innr -->
  <div class="myrow showTb">
@@ -287,7 +376,6 @@ include('cookie.php');
         <li><a href="https://boldswap.org/docs/terms-of-use.php">Terms of Service</a></li>
         <li><a href="https://boldswap.org/docs/about.php">About</a></li>
         <li><a href="https://boldswap.org/docs/cookie-policy.php">Cookie Policy</a></li>
-        <!-- <li><a href="https://boldswap.org/docs/refund-policy.php">Refund Policy</a></li> -->
         <li><a href="https://boldswap.org/docs/privacy-policy.php">Privacy Policy</a></li>
                     </ul>
                 </div>
@@ -315,6 +403,7 @@ include('cookie.php');
 <script src="./assets/js/jquery.bundle49f7.js"></script>
 <script src="./assets/js/script49f7.js"></script>
  <script>
+
 window.onload = function() {
     if(!window.location.hash) {
         window.location = window.location + '#loaded';
@@ -322,6 +411,7 @@ window.onload = function() {
     }
 }
  </script>
+
 </body>
 </html>
 

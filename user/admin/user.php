@@ -32,14 +32,14 @@ if(isset($_GET['vu']) || isset($_GET['va'])){$vu = @$_GET['vu']; $va = @$_GET['v
                </div>
                     <?php 
                     if(isset($_GET['vu']) && $_GET['vu']!==null){
-                   $vUser = "DELETE FROM `users` WHERE `id_no` = '$vu'";
+                   $vUser = "DELETE FROM users WHERE id_no = '$vu'";
                    if($con->query($vUser)){
                     	echo "<script>location.href='view-users.php'</script>";
                    }else{header('Location:view-users.php');}
                     }
 
               if(isset($_GET['va']) && $_GET['va']!==null){
-                   $vAdmin = "DELETE FROM `admin` WHERE `id_no` = '$va'";
+                   $vAdmin = "DELETE FROM admin WHERE id_no = '$va'";
                    if($con->query($vAdmin)){
                     	echo "<script>location.href='view-admin.php'</script>";
                    }else{header('Location:view-admin.php');}
@@ -51,7 +51,7 @@ if(isset($_GET['at']) && $_GET['at']!==null){
 	$at = $_GET['at'];
     $dateToday = date("Y-m-d");
 	echo"<script>window.alert('Transactions should be marked as approved only once. Click OK to proceed')</script>";
-	$vTransaction ="UPDATE `transaction` SET `status`='approved',`transact_date`='$dateToday' WHERE `txn`='$at'";
+	$vTransaction ="UPDATE transaction SET status='approved',transact_date='$dateToday' WHERE txn='$at'";
 	if($con->query($vTransaction)){echo "<script>location.href='transactions.php'</script>";}
 	else{header('Location:transactions.php');}
    }
@@ -66,42 +66,45 @@ if(isset($_GET['at']) && $_GET['at']!==null){
    ?>
 
    <?php 
-if(isset($_GET['af']) && $_GET['af']!==null){
-	$af = $_GET['af'];
+if(isset($_GET['afr']) && $_GET['afr']!==null){
+	$afr = $_GET['afr'];
 	echo"<script>window.alert('Fund requests should be marked as approved only once. Click OK to proceed')</script>";
-	$approve_fund ="UPDATE `fund` SET `status`='approved' WHERE `ftxn`='$af'";
+	$approve_fund ="UPDATE fund SET status='approved' WHERE ftxn='$afr'";
 	if($con->query($approve_fund)){
         echo "<script>location.href='funding-requests.php'</script>";
     }
 	else{header('Location:funding-requests.php');}
    }
 
-   if(isset($_GET['df']) && $_GET['df']!==null){
-	$df = $_GET['df'];
+   if(isset($_GET['dfr']) && $_GET['dfr']!==null){
+	$dfr = $_GET['dfr'];
 	echo"<script>window.alert('Click the OK button to permanently delete this fund request')</script>";
-	$fund_request_delete ="DELETE FROM `fund` WHERE `ftxn`='$df'";
+	$fund_request_delete ="DELETE FROM fund WHERE ftxn='$dfr'";
 	if($con->query($fund_request_delete)){echo "<script>location.href='funding-requests.php'</script>";}else{header('Location:funding-requests.php');}
    }
    ?>
 
-    <?php 
-if(isset($_GET['amt']) && $_GET['amt']!==null){
-    $amt = $_GET['amt'];
-    $approve_fund ="UPDATE `fund` SET `status`='approved' WHERE `ftxn`='$af'";
-    if($con->query($approve_fund)){echo "<script>location.href='funding-requests.php'</script>";}
-    else{header('Location:funding-requests.php');}
+<?php 
+if(isset($_GET['ae']) && $_GET['ae']!==null){
+    $ae = $_GET['ae'];
+    echo"<script>window.alert('Escrows should be marked as approved only once. Click OK to proceed')</script>";
+    $approve_escrow ="UPDATE transact SET status='approved' WHERE txn='$ae'";
+    if($con->query($approve_escrow)){
+        echo "<script>location.href='escrows.php'</script>";
+    }else{header('Location:escrows.php');}
    }
 
-   if(isset($_GET['df']) && $_GET['df']!==null){
-    $df = $_GET['df'];
-    echo"<script>window.alert('Click the OK button to permanently delete this fund request')</script>";
-    $fund_request_delete ="DELETE FROM `fund` WHERE `ftxn`='$df'";
-    if($con->query($fund_request_delete)){echo "<script>location.href='funding-requests.php'</script>";}else{header('Location:funding-requests.php');}
+   if(isset($_GET['de']) && $_GET['de']!==null){
+    $de = $_GET['de'];
+    echo"<script>window.alert('Click the OK button to permanently delete this escrow')</script>";
+    $escrow_request_delete ="DELETE FROM transact WHERE txn='$de'";
+    if($con->query($escrow_request_delete)){echo "<script>location.href='escrows.php'</script>";}else{header('Location:escrows.php');}
    }
    ?>
 
    <?php 
 if(isset($_GET['aw']) && $_GET['aw']!==null){
+
 	$aw = $_GET['aw'];
 	echo"<script>window.alert('Withdraw requests should be marked as approved only once. Click OK to proceed')</script>";
 	$approve_withdraw ="UPDATE `withdraw` SET `wstatus`='approved' WHERE `wtxn`='$aw'";
@@ -112,7 +115,7 @@ if(isset($_GET['aw']) && $_GET['aw']!==null){
    if(isset($_GET['dw']) && $_GET['dw']!==null){
 	$dw = $_GET['dw'];
 	echo"<script>window.alert('Click the OK button to permanently delete this withdraw request')</script>";
-	$withdraw_request_delete ="DELETE FROM `withdraw` WHERE `wtxn`='$dw'";
+	$withdraw_request_delete ="DELETE FROM withdraw WHERE wtxn='$dw'";
 	if($con->query($withdraw_request_delete)){echo "<script>location.href='withdraw-requests.php'</script>";}else{header('Location:withdraw-requests.php');}
    }
    ?>
@@ -122,7 +125,7 @@ if(isset($_GET['aw']) && $_GET['aw']!==null){
 if(isset($_GET['dwa']) && $_GET['dwa']!==null){
 	$dwa = $_GET['dwa'];
 	echo"<script>window.alert('Click the OK button to permanently delete this address')</script>";
-	$delete_wallet ="DELETE FROM `addresses` WHERE `id_no`='$dwa'";
+	$delete_wallet ="DELETE FROM addresses WHERE id_no='$dwa'";
 	if($con->query($delete_wallet)){echo "<script>location.href='addresses.php'</script>";}
 	else{header('Location:addresses.php');}
    }
