@@ -29,7 +29,7 @@ include('cookie.php');
                          <!-- <h4 class="card-title">Latest Funding Request</h4>  -->
                     </div>
                     <?php if(isset($request_date)&&isset($amount)&&isset($currency)&&isset($status)){?>
-                              <table class="data-table table table-hover dt-init user-tnx hideTb">
+                              <table class="data-table table table-hover dt-init user-tnx">
                         <thead>
                              
                             <tr class="data-item data-head">

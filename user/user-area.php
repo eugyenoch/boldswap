@@ -97,7 +97,30 @@ if(!isset($_SESSION['email'])){header('Location:login.php');}
 
 <li class="token-balance-sub col-md-12 col-lg-6 mb-3">
     <?php if(isset($fund_info['amount']) && isset($fund_info['currency'])){
-    echo "<span>Latest Requested Deposit: ".$fund_info['amount']." ".$fund_info['currency']. "</span><br>";}?>
+    echo "<span>Latest Requested Deposit: ".$fund_info['amount']." ".$fund_info['currency']. "</span><br>";}
+
+    echo "<big><strong>Fund Totals</strong></big><br>";
+    $r_deposit = "SELECT sum(amount) AS rsum,currency AS cur FROM fund WHERE user_email ='$session_email' AND status = 'pending'";
+    $r_depo_2 = $con->query($r_deposit);
+    $r_depo_3 = mysqli_fetch_assoc($r_depo_2);
+    if($r_depo_3){if($fund_info['currency']==="BTC"){echo $r_depo_3['cur'] . ' '.$r_depo_3['rsum'] .' <br>';}}
+
+    $r_eth = "SELECT sum(amount) AS rsum,currency AS cur FROM fund WHERE user_email ='$session_email' AND (status = 'approved' AND currency = 'ETH')";
+    $r_eth_2 = $con->query($r_eth);
+    $r_eth_3 = mysqli_fetch_assoc($r_eth_2);
+    if($r_eth_3){echo $r_eth_3['cur'] . ' '.$r_eth_3['rsum'] .' ';}
+
+    $r_Flow = "SELECT sum(amount) AS rsum,currency AS cur FROM fund WHERE user_email ='$session_email' AND (status = 'approved' AND currency = 'Flow')";
+    $r_Flow_2 = $con->query($r_Flow);
+    $r_Flow_3 = mysqli_fetch_assoc($r_Flow_2);
+    if($r_Flow_3){echo $r_Flow_3['cur'] . ' '.$r_Flow_3['rsum'] .' ';}
+
+    $r_bnb = "SELECT sum(amount) AS rsum,currency AS cur FROM fund WHERE user_email ='$session_email' AND (status = 'approved' AND currency = 'BNB')";
+    $r_bnb_2 = $con->query($r_bnb);
+    $r_bnb_3 = mysqli_fetch_assoc($r_bnb_2);
+    if($r_bnb_3){echo $r_bnb_3['cur'] . ' '.$r_bnb_3['rsum'] .'<br>';}
+    
+    ?>
     <?php
     $total_deposit = "SELECT sum(amount) AS totalsum FROM fund WHERE user_email='$session_email' AND status='approved'";
     $total_deposit_query = $con->query($total_deposit);
